@@ -28,6 +28,6 @@ Final Degree Project Advisor: Dr. D. Julio Gómez López and Dr. Nicolás Padill
 **Deian Orlando Petrovics T.**
 
 
-## ⚖️ Licencia
-
-Este proyecto está bajo la licencia **MIT**. Consulta [LICENSE](https://choosealicense.com/licenses/mit/) para más detalles.
+```
+## License
+This project is released under the MIT License. See [LICENSE](https://choosealicense.com/licenses/mit/) for details.
