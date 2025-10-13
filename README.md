@@ -1,133 +1,15 @@
-# Snort Agent
+# R-Snort
 
-Sistema modular para convertir Snort 3 en un agente gestionado vía REST API con ingesta automática, métricas del sistema y visualización en Grafana.
+The architecture of R-Snort is modular, distributed, and scalable, designed to adapt to SOHO environments. The system consists of two main elements: the Snort agents—deployed on embedded systems like the Raspberry Pi—and a central module that facilitates comprehensive coordination, management, and monitoring.
 
----
+Each Snort agent operates as an autonomous sensor, based on a customized version of Snort 3 to optimize performance on the limited hardware of embedded systems like the Raspberry Pi. These agents use a custom Snort installation compiled from its source code, incorporating various libraries for proper functioning, such as libdnet, libdaq, LuaJIT, Flex, Bison, and PCRE2 (figure 1). This allows for efficient and stable system execution on the Raspberry Pi platform.
 
-## 🔎 Descripción
+Threat detection is based on a dual approach: official community rules and custom rules specifically developed to identify sensitive data (e.g., credentials or bank cards), thereby compensating for the absence of the old "Sensitive Data" preprocessor, which has been discontinued in Snort 3. Additionally, the implemented system uses various preprocessors like HTTP Inspect, SSL Inspector, Stream IP, Stream TCP, and Reputation, which provide an exhaustive inspection of traffic to detect evasion techniques and encrypted threats. Furthermore, they incorporate the ClamAV antivirus module, which complements Snort, providing an additional layer of security against malware through signature-based analysis.
 
-**Snort Agent** transforma una instalación estándar de **Snort 3** en un entorno completo de monitorización para PYMEs o redes domésticas:
 
-* Ingesta automática de alertas desde `alert_json.txt`
-* Base de datos SQLite con alertas y métricas
-* API REST (FastAPI) con documentación Swagger
-* Dashboards automáticos en Grafana (con acceso anónimo)
-* Scripts modulares para instalación completa y sin intervención
 
----
 
-## 🚀 Características principales
 
-* Despliegue "one-click" compatible con Raspberry Pi y Ubuntu Server
-* Dashboard de Grafana configurado automáticamente usando la variable `${snort}`
-* API REST para consultar alertas, métricas, reglas y reiniciar Snort
-* Servicio Python de ingesta en tiempo real y recolección de métricas del sistema
-* Logrotate + cron configurado por defecto para rotación y backup
-
----
-
-## 📋 Requisitos
-
-* Ubuntu 20.04+ o Debian 10+
-* Python 3.8+, Bash, SQLite, Grafana, Snort 3
-* Acceso root durante la instalación
-
----
-
-## 🛠️ Instalación
-
-```bash
-git clone https://github.com/deianp189/snort-agent.git
-cd snort-agent
-sudo ./install.sh
-```
-
----
-
-## 🔗 Accesos y verificación
-
-```bash
-systemctl status snort rsnort-api rsnort-ingest rsnort-metrics.timer grafana-server
-```
-
-* API REST: [http://localhost:8080/docs](http://localhost:8080/docs)
-* Grafana: [http://localhost:3000](http://localhost:3000)
-
----
-
-## ⚙️ Configuración
-
-### Snort (`snort.lua`)
-
-Ruta: `/usr/local/snort/etc/snort/snort.lua`
-
-```lua
-alert_json = {
-  file = true,
-  limit = 50,
-  fields = [[timestamp proto dir src_addr src_port dst_addr dst_port msg sid gid priority]]
-}
-```
-### API (FastAPI)
-
-| Método  | Ruta                               | Descripción                                        |
-| ------- | ---------------------------------- | -------------------------------------------------- |
-| GET     | `/status`                         | Estado del sistema                                 |
-| GET     | `/services/status`                | Estado de los servicios principales                |
-| POST    | `/services/restart`               | Reinicia el servicio principal (Snort, etc.)       |
-| GET     | `/alerts`                         | Obtener todas las alertas actuales                 |
-| GET     | `/alerts/last`                    | Obtener la última alerta registrada                |
-| GET     | `/metrics`                        | Métricas del sistema (CPU, RAM, etc.)              |
-| GET     | `/rules`                          | Listado de reglas activas                          |
-| POST    | `/rules`                          | Añadir una nueva regla                             |
-| DELETE  | `/rules/{sid}`                    | Eliminar una regla por su SID                      |
-| GET     | `/archived-files`                 | Listar archivos de alertas archivadas              |
-| GET     | `/archived-files/{filename}`      | Descargar un archivo de alertas archivadas         |
-| GET     | `/download-alerts`                | Descargar alertas activas en formato CSV           |
-| GET     | `/grafana/dashboard-url`          | Obtener URL del dashboard principal de Grafana     |
-
-### Grafana (`grafana.ini`)
-
-```ini
-[security]
-allow_embedding = true
-
-[auth.anonymous]
-enabled = true
-
-[auth.jwt]
-enabled = false
-```
-
-### Rotación de logs
-
-* Logrotate: `/etc/logrotate.d/snort-alert-json`
-* Cron diario: `/etc/cron.d/rsnort_backup` (01:00)
-
----
-
-## 📊 Uso básico
-
-```bash
-# Ver últimas alertas
-curl http://localhost:8080/alerts?limit=5
-
-# Ver estado
-dcurl http://localhost:8080/status
-
-# Ver métricas
-curl http://localhost:8080/metrics?limit=10
-
-# Cambiar reglas
-curl -X PUT http://localhost:8080/rules \
-     -H "Content-Type: text/plain" \
-     --data-binary @mi_reglas.rules
-
-# Reiniciar Snort
-curl -X POST http://localhost:8080/restart
-```
-
----
 
 ## ⚖️ Licencia
 
