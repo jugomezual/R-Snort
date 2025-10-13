@@ -125,10 +125,13 @@ curl -X PUT http://localhost:8080/rules \
 curl -X POST http://localhost:8080/restart
 
 ```
-## ⚖️ Licencia
+
+
+## License
 This project is released under the MIT License. See [LICENSE](https://choosealicense.com/licenses/mit/) for details.
 
 ---
 ## Contact
 **Deian Orlando Petrovics T.**
+
 
