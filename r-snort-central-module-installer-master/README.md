@@ -1,85 +1,78 @@
-# R-SNORT WebApp: Sistema Centralizado de Monitorización y Gestión de Intrusiones
+# R-SNORT WebApp: Centralized Intrusion Monitoring and Management System
 
-**R-SNORT WebApp** es una solución integral y modular de detección y gestión de intrusiones (NIDS), diseñada para desplegarse fácilmente en pequeñas redes locales (SOHO/SMB) utilizando **Snort 3**, **Grafana**, y tecnologías modernas como **Spring Boot** y **Angular**. La aplicación permite la supervisión centralizada de múltiples agentes distribuidos, facilitando el análisis forense, la descarga de alertas y la gestión de reglas desde una interfaz gráfica web.
+**R-SNORT WebApp** is a comprehensive and modular Network Intrusion Detection and Management System (NIDS), designed for easy deployment in small local networks (SOHO/SMB) utilizing **Snort 3**, **Grafana**, and modern technologies like **Spring Boot** and **Angular**. The application enables centralized supervision of multiple distributed agents, facilitating forensic analysis, alert downloading, and rule management from a single web graphical interface.
 
 ---
 
-## 🌐 Estructura del Proyecto
+## 🌐 Project Structure
 
 ```
 r-snort-central-module-installer/
-├── rsnort-backend/           # Backend en Spring Boot
-├── rsnort-frontend/          # Frontend en Angular
-└── scripts/                  # Scripts de instalación y despliegue automatizado
+├── rsnort-backend/              # Spring Boot Backend
+├── rsnort-frontend/             # Angular Frontend
+└── scripts/                     # Installation and automated deployment scripts
 ```
 
 ---
 
-## ⚙️ Tecnologías Utilizadas
+## ⚙️ Technologies Used
 
-- 🔐 **Snort 3.1.84.0**: Motor NIDS en cada agente.
-- 🧠 **Spring Boot 3**: Backend REST para el módulo central.
-- 🖥️ **Angular 19**: Frontend standalone para la UI web.
-- 📊 **Grafana 12**: Visualización avanzada de alertas y métricas del sistema.
-- 🐬 **MariaDB**: Almacenamiento de alertas y reglas.
-- 📦 **Instaladores `.deb`**: Instalación automática, sin intervención del usuario.
-
----
-
-## 🧩 Componentes del Sistema
-
-### 1. Agente R-Snort
-Cada Raspberry Pi o servidor Ubuntu actúa como agente autónomo que:
-- Detecta tráfico malicioso con Snort 3.
-- Genera alertas en JSON rotadas y archivadas automáticamente.
-- Expone una API REST (`agent_api.py`) con endpoints `/alerts`, `/rules`, `/status`, etc.
-- Recolecta métricas del sistema (`metrics_timer.py`).
-- Se instala en segundos mediante un paquete `.deb`.
-
-### 2. Módulo Central
-- Actúa como agente y servidor principal.
-- Agrega alertas de múltiples agentes.
-- Permite la gestión remota desde el frontend web.
-- Ofrece dashboards de Grafana preconfigurados.
-- Administra usuarios con roles y acceso seguro.
+- 🔐 **Snort 3.1.84.0**: NIDS Engine on each agent.
+- 🧠 **Spring Boot 3**: REST Backend for the central module.
+- 🖥️ **Angular 19**: Standalone Frontend for the web UI.
+- 📊 **Grafana 12**: Advanced visualization of alerts and system metrics.
+- 🐬 **MariaDB**: Storage for alerts and rules.
+- 📦 **.deb Installers**: Automatic, zero-intervention installation.
 
 ---
 
-## 🚀 Instalación Automática
+## 🧩 System Components
 
-> Requisitos previos: Ubuntu Server 22.04+, acceso sudo, conexión a Internet.
+### 1. R-Snort Agent
+Each Raspberry Pi or Ubuntu server acts as an autonomous agent that:
+- Detects malicious traffic with Snort 3.
+- Generates JSON alerts that are automatically rotated and archived.
+- Exposes a REST API (`agent_api.py`) with `/alerts`, `/rules`, `/status`, etc., endpoints.
+- Collects system metrics (`metrics_timer.py`).
+- Installs in seconds via a `.deb` package.
+
+### 2. Central Module
+- Acts as both an agent and the primary server.
+- Aggregates alerts from multiple agents.
+- Allows remote management from the web frontend.
+- Offers pre-configured Grafana dashboards.
+- Manages users with roles and secure access.
+
+---
+
+## 🚀 Automatic Installation
+
+> Prerequisites: Ubuntu Server 22.04+, sudo access, Internet connection.
 
 ```bash
-git clone https://github.com/tuusuario/rsnort-webapp.git
+git clone [https://github.com/jugomezual/rsnort-webapp.git](https://github.com/jugomezual/rsnort-webapp.git)
 cd rsnort-central-module-installer/scripts
 chmod +x run_all.sh
 sudo ./run_all.sh
-```
 
-Esto compila e instala automáticamente:
-- El frontend Angular y backend Spring Boot
-- La base de datos MariaDB
-- Snort 3 con configuración personalizada
-- Dashboards de Grafana preconfigurados
-- Servicio del sistema para rsnort_webapp
 
----
-
-## 🛡️ Funcionalidades Destacadas
-
-- 📡 **Detección en tiempo real** de ataques ICMP, SNMP, DNS, exfiltración de datos, etc.
-- 📂 **Archivado forense** de logs con rotación automática vía `logrotate`.
-- 🔍 **Interfaz gráfica profesional** con panel oscuro y visualización de alertas.
-- 🔐 **Login seguro con roles** y gestión de reglas desde el frontend.
-- 🌐 **Gestión de múltiples agentes** desde una única webApp.
-- 📥 **Descarga selectiva de alertas** y logs archivados por agente.
+This automatically compiles and installs:
+- The Angular frontend and Spring Boot backend
+- MariaDB database
+- Snort 3 with custom configuration
+- Pre-configured Grafana dashboards
+- System service for rsnort_webapp
 
 ---
 
-## 📸 Capturas de Pantalla
-![1](https://github.com/user-attachments/assets/5746a7ef-8416-4361-8cb2-d8a5629f9400)
-![2](https://github.com/user-attachments/assets/a4be0c33-e116-4bcc-a47c-9066fdd9ccc3)
-![9](https://github.com/user-attachments/assets/4242148f-3d5e-411c-96ad-6c3ba26c5d9b)
+## 🛡️ Key Features
+- 📡 Real-time detection of ICMP, SNMP, DNS attacks, data exfiltration, etc.
+- 📂 Forensic log archiving with automatic rotation via logrotate.
+- 🔍 Professional graphical interface with dark panel and alert visualization.
+- 🔐 Secure login with roles and rule management from the frontend.
+- 🌐 Management of multiple agents from a single webApp.
+- 📥 Selective download of alerts and archived logs per agent.
+
 
 ---
 
@@ -87,41 +80,26 @@ Esto compila e instala automáticamente:
 
 | Script                | Función principal                                               |
 |----------------------|------------------------------------------------------------------|
-| `00_common.sh`       | Variables comunes y funciones auxiliares                        |
-| `01_dependencies.sh` | Instalación de dependencias en el sistema                       |
-| `02_compile_frontend.sh` | Compila Angular en modo producción                         |
-| `03_compile_backend.sh`  | Empaqueta el backend como `.jar` con Maven                 |
-| `04_prepare_db.sh`   | Crea la base de datos y estructura inicial                      |
-| `05_add_admin_user.sh` | Inserta un usuario administrador predefinido                 |
-| `06_setup_agents.sh` | Añade agentes con comprobación automática (`ping` + `/docs`)    |
-| `07_install_service.sh` | Instala el servicio systemd para ejecución automática        |
-| `run_all.sh`         | Ejecuta todo el proceso de instalación de principio a fin       |
+| `00_common.sh`       | Common variables and auxiliary functions                       |
+| `01_dependencies.sh` | Installation of system dependencies                    |
+| `02_compile_frontend.sh` | Compiles Angular in production mode                        |
+| `03_compile_backend.sh`  | Packages the backend as a .jar with Maven                |
+| `04_prepare_db.sh`   | Creates the initial database and structure                    |
+| `05_add_admin_user.sh` | Inserts a predefined administrator user               |
+| `06_setup_agents.sh` | Adds agents with automatic check (ping + /docs)    |
+| `07_install_service.sh` | Installs the systemd service for automatic execution       |
+| `run_all.sh`         | 	Executes the entire installation process from start to finish      |
 
 ---
 
-## 🧪 Pruebas y Validación
-
-La plataforma ha sido probada con casos reales de intrusión simulada, incluyendo:
-- Pings masivos
-- Escaneos de puertos con Nmap
-- Tráfico DNS malicioso
-- Fugas de emails, tarjetas de crédito y NUSS
+## 📚 Technical Documentation
+- snort-agent and rsnort_webapp are separated by function.
+- All REST endpoints are documented under /docs of each agent.
+- Includes compatibility with systems without NUMA (automatic deactivation).
 
 ---
 
-## 📚 Documentación Técnica
 
-- `snort-agent` y `rsnort_webapp` están separados por funciones.
-- Todos los endpoints REST están documentados en `/docs` de cada agente.
-- Incluye compatibilidad con sistemas sin NUMA (desactivación automática).
-
----
-
-## 🤝 Colaboraciones
-
-Este proyecto es parte de un Trabajo de Fin de Grado (TFG) en Ingeniería Informática y está diseñado para ser expandido, profesionalizado y adaptado a entornos productivos reales.
-
----
 
 ## 📜 Licencia
 
@@ -129,6 +107,6 @@ Licencia MIT. Libre uso, modificación y distribución con atribución.
 
 ---
 
-## 📫 Contacto
+## 📫 Contact
 
-Desarrollado por Deian Orlando Petrovics.  
+Deian Orlando Petrovics.  
