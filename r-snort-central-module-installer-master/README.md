@@ -97,16 +97,13 @@ This automatically compiles and installs:
 - All REST endpoints are documented under /docs of each agent.
 - Includes compatibility with systems without NUMA (automatic deactivation).
 
----
 
 
-
-## 📜 Licencia
-
-Licencia MIT. Libre uso, modificación y distribución con atribución.
+```
+## License
+This project is released under the MIT License. See [LICENSE](https://choosealicense.com/licenses/mit/) for details.
 
 ---
+## Contact
+**Deian Orlando Petrovics T.**
 
-## 📫 Contact
-
-Deian Orlando Petrovics.  
