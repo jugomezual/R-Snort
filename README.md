@@ -10,6 +10,19 @@ Threat detection is based on a dual approach: official community rules and custo
 
 ![R-Snort – Central Module Architecture Development](snort_architecture.png)
 
+The R-Snort architecture is structured into three independent modules that simplify the process:
+•	rsnort-installer: Completely installs Snort 3, including its dependencies, preprocessor configuration, and the activation of advanced detection rules.
+•	snort-agent: Installs a monitoring agent, integrating essential services such as MariaDB, Grafana, metrics collection, log rotation, and a REST API for system interaction.
+•	rsnort-central-module: Installs the administration interface, which includes the Spring Boot backend and the Angular frontend. This central module centralizes the management of all system agents through an intuitive web interface.
+
+
+
+## Credits
+
+Authors: Deian Orlando Petrovics Tabacu,  Dr. Julio Gómez López and Dr. Nicolás Padilla Soriano
+
+Final Degree Project Advisor: Dr. D. Julio Gómez López and Dr. Nicolás Padilla Soriano - University of Almería, 2025
+
 
 ## ⚖️ Licencia
 
