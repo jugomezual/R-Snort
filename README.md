@@ -20,8 +20,12 @@ The R-Snort architecture is structured into three independent modules that simpl
 ## Credits
 
 Authors: Deian Orlando Petrovics Tabacu,  Dr. Julio Gómez López and Dr. Nicolás Padilla Soriano
-
 Final Degree Project Advisor: Dr. D. Julio Gómez López and Dr. Nicolás Padilla Soriano - University of Almería, 2025
+
+
+---
+## Contact
+**Deian Orlando Petrovics T.**
 
 
 ## ⚖️ Licencia
