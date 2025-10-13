@@ -8,7 +8,7 @@ Threat detection is based on a dual approach: official community rules and custo
 
 
 
-
+![R-Snort – Central Module Architecture Development](snort_architecture.png)
 
 
 ## ⚖️ Licencia
