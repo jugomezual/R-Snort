@@ -1,0 +1,293 @@
+/* header.component.css — versión compacta y contrastada */
+:host {
+  --primary-neon: #00e1ff;
+  --dark-surface: #1a1a1a;
+  --dark-surface-elevated: #242424;
+  --text-primary: #e0e0e0;
+}
+
+/* ─────────────────────────── Toolbar ─────────────────────────── */
+.rsnort-toolbar {
+  background: var(--dark-surface);
+  border-radius: 12px;
+  box-shadow:
+    inset 4px 4px 8px rgba(0, 0, 0, 0.8),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+  color: var(--primary-neon);
+  padding: 0 24px;
+  height: 64px;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+/* Logo + título */
+.logo-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo {
+  height: 50px;
+  max-height: 100%;
+  margin-right: 12px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(0,225,255,.6));
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-neon);
+  letter-spacing: .5px;
+}
+
+/* Separador */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Navegación */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.nav-links a {
+  background: var(--dark-surface);
+  color: var(--text-primary);
+  padding: 6px 14px;
+  border-radius: 8px;
+  box-shadow:
+    4px 4px 8px rgba(0,0,0,.8),
+    -4px -4px 8px rgba(255,255,255,.05);
+  font-weight: 500;
+  transition: box-shadow .3s, color .3s;
+  text-decoration: none;
+  line-height: 1;
+}
+.nav-links a:hover {
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,.8),
+    inset -4px -4px 8px rgba(255,255,255,.05);
+  color: var(--primary-neon);
+}
+.nav-links a.active-link {
+  color: var(--primary-neon);
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,.8),
+    inset -4px -4px 12px rgba(0,225,255,.4);
+}
+
+/* ─────────────── Selector de agente (botón + mat-menu) ─────────────── */
+.agent-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--dark-surface);
+  color: var(--text-primary);
+  padding: 4px 12px;
+  border-radius: 8px;
+  box-shadow:
+    4px 4px 8px rgba(0,0,0,.8),
+    -4px -4px 8px rgba(255,255,255,.05);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: box-shadow .3s, color .3s;
+  margin-left: 1.25rem; /* separación frente a nav-links */
+}
+.agent-button:hover {
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,.8),
+    inset -4px -4px 8px rgba(255,255,255,.05);
+  color: var(--primary-neon);
+}
+.agent-button mat-icon {
+  font-size: 20px;
+  color: var(--primary-neon);
+}
+
+/* Botón de usuario */
+.user-button {
+  margin-left: 1rem;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  box-shadow:
+    4px 4px 8px rgba(0,0,0,.8),
+    -4px -4px 8px rgba(255,255,255,.05);
+}
+.user-button mat-icon {
+  color: var(--text-primary);
+  font-size: 24px;
+}
+.user-button:hover mat-icon {
+  color: var(--primary-neon);
+}
+
+/* ─────────────────────────── Responsividad ─────────────────────────── */
+@media (max-width: 960px) {
+  .title { display: none; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+}
+
+/* ─────────── Asegura el span dentro del botón de agente ─────────── */
+.agent-button span {
+  color: var(--text-primary) !important;
+  white-space: nowrap;
+}
+
+/* ─────────── Overrides para el overlay mat-menu ─────────── */
+:host ::ng-deep .cdk-overlay-container .mat-menu-panel.agent-menu {
+  background: var(--dark-surface) !important;
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,.8),
+    inset -4px -4px 8px rgba(255,255,255,.05) !important;
+  min-width: 180px !important;
+}
+
+:host ::ng-deep .cdk-overlay-container .mat-menu-panel.agent-menu .mat-menu-content {
+  background: transparent !important;
+  padding: 4px 0 !important;
+}
+
+:host ::ng-deep .cdk-overlay-container .mat-menu-panel.agent-menu .mat-menu-item {
+  color: var(--text-primary) !important;
+  transition: box-shadow .3s, color .3s;
+  padding: 0 16px !important;
+}
+
+:host ::ng-deep .cdk-overlay-container .mat-menu-panel.agent-menu .mat-menu-item:hover,
+:host ::ng-deep .cdk-overlay-container .mat-menu-panel.agent-menu .mat-menu-item.cdk-program-focused,
+:host ::ng-deep .cdk-overlay-container .mat-menu-panel.agent-menu .mat-menu-item.cdk-focused {
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,.8),
+    inset -4px -4px 8px rgba(255,255,255,.05) !important;
+  color: var(--primary-neon) !important;
+}
+
+.add-agent-button {
+  color: var(--primary-neon);
+  background: rgba(0, 225, 255, 0.05);
+  border: 1px solid var(--primary-neon);
+  margin-left: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.add-agent-button:hover {
+  background: var(--primary-neon);
+  color: #000;
+  box-shadow: 0 0 8px rgba(0, 225, 255, 0.5);
+}
+
+.add-agent-button {
+  color: var(--primary-neon);
+  background: rgba(0, 225, 255, 0.05);
+  border: 1px solid var(--primary-neon);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.add-agent-button:hover {
+  background: var(--primary-neon);
+  color: #000;
+  box-shadow: 0 0 8px rgba(0, 225, 255, 0.5);
+}
+
+/* Asegura que el mat-icon esté centrado sin desbordes */
+.add-agent-button mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-agent-button {
+  color: var(--primary-neon);
+  background: rgba(0, 225, 255, 0.05);
+  border: 1px solid var(--primary-neon);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.add-agent-button:hover {
+  background: var(--primary-neon);
+  color: #000;
+  box-shadow: 0 0 8px rgba(0, 225, 255, 0.5);
+}
+
+/* Asegura que el ícono esté perfectamente centrado */
+.add-center-button {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-button {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 0.75rem;
+  border-radius: 50%;
+  background: var(--dark-surface-elevated);
+  box-shadow:
+    4px 4px 8px rgba(0,0,0,.8),
+    -4px -4px 8px rgba(255,255,255,.05);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.user-button:hover {
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,.8),
+    inset -4px -4px 8px rgba(255,255,255,.05);
+}
+
+/* Ícono de apagar ajustado */
+.user-button .exit {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.user-button:hover .exit {
+  color: var(--primary-neon);
+}
+
+

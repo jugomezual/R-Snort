@@ -1,0 +1,47 @@
+<ng-container *ngIf="agentSrv.current as cur; else loading">
+  <div class="grafana-grid">
+
+    <!-- Temperatura → panelId 29 -->
+    <grafana-frame [ip]="cur.ip"
+      path="/d-solo/ALgSiPiWk/snort-ids-ips-dashboard?orgId=1&panelId=29&refresh=30s">
+    </grafana-frame>
+
+    <!-- CPU & Disco → panelId 28 -->
+    <grafana-frame [ip]="cur.ip"
+      path="/d-solo/ALgSiPiWk/snort-ids-ips-dashboard?orgId=1&panelId=28&refresh=30s">
+    </grafana-frame>
+
+    <!-- Donut Top protocolos → 22 -->
+    <grafana-frame [ip]="cur.ip"
+      path="/d-solo/ALgSiPiWk/snort-ids-ips-dashboard?orgId=1&panelId=22&refresh=1m">
+    </grafana-frame>
+
+    <!-- Heat-map protocolos/time → 13 -->
+    <grafana-frame [ip]="cur.ip"
+      path="/d-solo/ALgSiPiWk/snort-ids-ips-dashboard?orgId=1&panelId=13&refresh=1m">
+    </grafana-frame>
+
+    <!-- Top IP origen (7) -->
+    <grafana-frame [ip]="cur.ip"
+      path="/d-solo/ALgSiPiWk/snort-ids-ips-dashboard?orgId=1&panelId=7&refresh=1m">
+    </grafana-frame>
+    <!-- Top IP destino (6) -->
+    <grafana-frame [ip]="cur.ip"
+      path="/d-solo/ALgSiPiWk/snort-ids-ips-dashboard?orgId=1&panelId=6&refresh=1m">
+    </grafana-frame>
+    <!-- Top puertos destino (8) -->
+    <grafana-frame [ip]="cur.ip"
+      path="/d-solo/ALgSiPiWk/snort-ids-ips-dashboard?orgId=1&panelId=8&refresh=1m">
+    </grafana-frame>
+
+    <!-- Tabla de alertas en vivo (26)  ocupa todo -->
+    <grafana-frame class="wide"
+      [ip]="cur.ip"
+      path="/d-solo/ALgSiPiWk/snort-ids-ips-dashboard?orgId=1&panelId=26&refresh=10s">
+    </grafana-frame>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

@@ -1,0 +1,47 @@
+/* styles.css global */
+body { background:#111; color:#e0e0e0; }
+.grafana-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px; }
+.mat-toolbar.rsnort-toolbar { backdrop-filter:blur(8px); border-bottom:1px solid #00eaff40; }
+.agent-select { min-width:220px; margin-right:1rem; }
+
+/* gráficos con borde neon */
+grafana-frame iframe { border-radius:8px; box-shadow:0 0 6px #0ff4; }
+
+/* contenedor del diálogo ⇒ mismo color y radio que el wrapper, sin padding extra */
+::ng-deep .transparent-dialog .mat-dialog-container {
+  background: #161a1f;          /* mismo color que usas en el wrapper */
+  border-radius: 18px;          /* igual que wrapper */
+  padding: 0 !important;        /* eliminamos el padding de Material */
+  box-shadow: 0 0 30px rgba(0, 225, 255, .25);
+  overflow: hidden;             /* por si algo se desborda */
+}
+
+/* deja el contenedor real del diálogo completamente transparente */
+::ng-deep .transparent-dialog .mat-dialog-container {
+  background: transparent !important;   /* ⬅ fuerza transparencia */
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+
+
+/* 2) backdrop borroso + oscurecido */
+.blur-backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+/* 1) elimina la zona reservada para hints/errores  */
+.input-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;          /* quita 22 px aprox. de alto */
+}
+
+/* 2) ajusta márgenes para que el campo quede alineado */
+.input-field {
+  width: 100%;
+  margin-bottom: 0.8rem;   /* separador más pequeño y limpio */
+}
+
+
+
