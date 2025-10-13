@@ -1,50 +1,49 @@
 # Snort Agent
 
-Sistema modular para convertir Snort 3 en un agente gestionado vía REST API con ingesta automática, métricas del sistema y visualización en Grafana.
+Modular system to convert Snort 3 into a managed agent via a REST API, featuring automatic ingestion, system metrics, and Grafana visualization.
 
 ---
 
-## 🔎 Descripción
+## 🔎 Description
 
-**Snort Agent** transforma una instalación estándar de **Snort 3** en un entorno completo de monitorización para PYMEs o redes domésticas:
+**Snort Agent** transforms a standard **Snort 3** installation into a complete monitoring environment for SMEs or home networks:
 
-* Ingesta automática de alertas desde `alert_json.txt`
-* Base de datos SQLite con alertas y métricas
-* API REST (FastAPI) con documentación Swagger
-* Dashboards automáticos en Grafana (con acceso anónimo)
-* Scripts modulares para instalación completa y sin intervención
-
----
-
-## 🚀 Características principales
-
-* Despliegue "one-click" compatible con Raspberry Pi y Ubuntu Server
-* Dashboard de Grafana configurado automáticamente usando la variable `${snort}`
-* API REST para consultar alertas, métricas, reglas y reiniciar Snort
-* Servicio Python de ingesta en tiempo real y recolección de métricas del sistema
-* Logrotate + cron configurado por defecto para rotación y backup
+* Automatic alert ingestion from `alert_json.txt`
+* SQLite database storing alerts and metrics
+* REST API (FastAPI) with Swagger documentation
+* Automatic Grafana dashboards (with anonymous access)
+* Modular scripts for complete, non-interventional installation
 
 ---
 
-## 📋 Requisitos
+## 🚀 Key Features
 
-* Ubuntu 20.04+ o Debian 10+
+* "One-click" deployment compatible with Raspberry Pi and Ubuntu Server
+* Grafana Dashboard automatically configured using the `${snort}` variable
+* REST API to query alerts, metrics, rules, and restart Snort
+* Python service for real-time ingestion and system metrics collection
+* Logrotate + cron configured by default for rotation and backup
+
+---
+
+## 📋 Requirements
+
+* Ubuntu 20.04+ or Debian 10+
 * Python 3.8+, Bash, SQLite, Grafana, Snort 3
-* Acceso root durante la instalación
+* Root access during installation
 
 ---
 
-## 🛠️ Instalación
+## 🛠️ Installation
 
 ```bash
-git clone https://github.com/deianp189/snort-agent.git
+git clone [https://github.com/deianp189/snort-agent.git](https://github.com/deianp189/snort-agent.git)
 cd snort-agent
 sudo ./install.sh
-```
 
 ---
 
-## 🔗 Accesos y verificación
+## 🔗 Access and Verification
 
 ```bash
 systemctl status snort rsnort-api rsnort-ingest rsnort-metrics.timer grafana-server
@@ -55,11 +54,11 @@ systemctl status snort rsnort-api rsnort-ingest rsnort-metrics.timer grafana-ser
 
 ---
 
-## ⚙️ Configuración
+## ⚙️ Configuration
 
 ### Snort (`snort.lua`)
 
-Ruta: `/usr/local/snort/etc/snort/snort.lua`
+Path: `/usr/local/snort/etc/snort/snort.lua`
 
 ```lua
 alert_json = {
@@ -72,19 +71,19 @@ alert_json = {
 
 | Método  | Ruta                               | Descripción                                        |
 | ------- | ---------------------------------- | -------------------------------------------------- |
-| GET     | `/status`                         | Estado del sistema                                 |
-| GET     | `/services/status`                | Estado de los servicios principales                |
-| POST    | `/services/restart`               | Reinicia el servicio principal (Snort, etc.)       |
-| GET     | `/alerts`                         | Obtener todas las alertas actuales                 |
-| GET     | `/alerts/last`                    | Obtener la última alerta registrada                |
-| GET     | `/metrics`                        | Métricas del sistema (CPU, RAM, etc.)              |
-| GET     | `/rules`                          | Listado de reglas activas                          |
-| POST    | `/rules`                          | Añadir una nueva regla                             |
-| DELETE  | `/rules/{sid}`                    | Eliminar una regla por su SID                      |
-| GET     | `/archived-files`                 | Listar archivos de alertas archivadas              |
-| GET     | `/archived-files/{filename}`      | Descargar un archivo de alertas archivadas         |
-| GET     | `/download-alerts`                | Descargar alertas activas en formato CSV           |
-| GET     | `/grafana/dashboard-url`          | Obtener URL del dashboard principal de Grafana     |
+| GET     | `/status`                         | System status                                |
+| GET     | `/services/status`                | Status of main services              |
+| POST    | `/services/restart`               | Restarts the main service (Snort, etc.)       |
+| GET     | `/alerts`                         | Get all current alerts                |
+| GET     | `/alerts/last`                    | Get the last registered alert              |
+| GET     | `/metrics`                        | System metrics (CPU, RAM, etc.)              |
+| GET     | `/rules`                          | List of active rules                      |
+| POST    | `/rules`                          | Add a new rule                           |
+| DELETE  | `/rules/{sid}`                    | Delete a rule by its SID                   |
+| GET     | `/archived-files`                 | List archived alert files          |
+| GET     | `/archived-files/{filename}`      | Download an archived alert file      |
+| GET     | `/download-alerts`                | Download active alerts in CSV format          |
+| GET     | `/grafana/dashboard-url`          | Get main Grafana dashboard URL    |
 
 ### Grafana (`grafana.ini`)
 
@@ -99,36 +98,37 @@ enabled = true
 enabled = false
 ```
 
-### Rotación de logs
+### Log Rotation
 
 * Logrotate: `/etc/logrotate.d/snort-alert-json`
 * Cron diario: `/etc/cron.d/rsnort_backup` (01:00)
 
 ---
 
-## 📊 Uso básico
-
+## 📊 Basic Usage
 ```bash
-# Ver últimas alertas
+# View last 5 alerts
 curl http://localhost:8080/alerts?limit=5
 
-# Ver estado
-dcurl http://localhost:8080/status
+# View status
+curl http://localhost:8080/status
 
-# Ver métricas
+# View metrics
 curl http://localhost:8080/metrics?limit=10
 
-# Cambiar reglas
+# Change rules
 curl -X PUT http://localhost:8080/rules \
      -H "Content-Type: text/plain" \
-     --data-binary @mi_reglas.rules
+     --data-binary @my_rules.rules
 
-# Reiniciar Snort
+# Restart Snort
 curl -X POST http://localhost:8080/restart
+
 ```
+## ⚖️ Licencia
+his project is released under the MIT License. See [LICENSE](https://choosealicense.com/licenses/mit/) for details.
 
 ---
+## Contact
+**Deian Orlando Petrovics T.**
 
-## ⚖️ Licencia
-
-Este proyecto está bajo la licencia **MIT**. Consulta [LICENSE](https://choosealicense.com/licenses/mit/) para más detalles.
