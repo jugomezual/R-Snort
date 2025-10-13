@@ -1,0 +1,1 @@
+import{Ea as i,Oa as t,jc as o}from"./chunk-2BTMJZGR.js";var s=class e{constructor(r){this.s=r}transform(r){return this.s.bypassSecurityTrustResourceUrl(r)}static \u0275fac=function(a){return new(a||e)(i(o,16))};static \u0275pipe=t({name:"safeUrl",type:e,pure:!0})};export{s as a};

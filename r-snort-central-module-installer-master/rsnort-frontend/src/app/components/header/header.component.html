@@ -1,0 +1,60 @@
+<mat-toolbar class="rsnort-toolbar">
+  <!-- Logo + título -->
+  <div class="logo-container" (click)="playLogoSound()">
+    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <span class="title">R-SNORT</span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <!-- Navegación -->
+  <nav class="nav-links">
+    <a mat-button routerLink="/overview" routerLinkActive="active-link">Overview</a>
+    <a mat-button [routerLink]="['/agents', currentId, 'alerts']" routerLinkActive="active-link">Alerts</a>
+    <a mat-button [routerLink]="['/agents', currentId, 'rules']" routerLinkActive="active-link">Rules</a>
+    <a mat-button routerLink="/status" routerLinkActive="active-link">Status</a>
+  </nav>
+
+  <!-- Selector de agente -->
+  <button mat-button [matMenuTriggerFor]="agentMenu" class="agent-button">
+    <mat-icon>{{ currentId === 'central' ? 'public' : 'dns' }}</mat-icon>
+    <span>
+      {{
+        currentId === 'central'
+          ? 'Central (' + getAgentIp(currentId) + ')'
+          : currentId + ' (' + getAgentIp(currentId) + ')'
+      }}
+    </span>
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+
+  <mat-menu #agentMenu="matMenu" xPosition="before" yPosition="below" panelClass="agent-menu">
+    <button mat-menu-item *ngFor="let a of agents" (click)="switchAgent(a.id)" [class.selected]="a.id === currentId"
+      class="agent-menu-item">
+      <mat-icon>{{ a.id === 'central' ? 'public' : 'dns' }}</mat-icon>
+      <span>
+        {{
+          a.id === 'central'
+            ? 'Central (' + a.ip + ')'
+            : a.id + ' (' + a.ip + ')'
+        }}
+      </span>
+    </button>
+  </mat-menu>
+
+  <!-- Botón para añadir nuevo agente -->
+  <button mat-icon-button class="add-agent-button" (click)="openDialog()" aria-label="Addº new agent">
+    <mat-icon class="add-center-button">add_circle</mat-icon>
+  </button>
+
+  <!-- Menú de usuario -->
+  <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-button">
+    <mat-icon class="exit">power_settings_new</mat-icon>
+  </button>
+  <mat-menu #userMenu="matMenu" xPosition="before" yPosition="below">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Log out</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

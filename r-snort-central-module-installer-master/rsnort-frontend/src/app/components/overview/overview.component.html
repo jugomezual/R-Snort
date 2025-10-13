@@ -1,0 +1,55 @@
+<ng-container *ngIf="central$ | async as central; else loading">
+  <ng-container *ngIf="central && dashboardUid; else fallback">
+    <div class="overview-grid">
+      <!-- Comparación de severidad -->
+      <mat-card class="panel-card severity">
+        <grafana-frame
+          [ip]="central.ip"
+          [path]="'/d-solo/' + dashboardUid + '/snort-ids-ips-dashboard?orgId=1&panelId=1&refresh=30s'">
+        </grafana-frame>
+      </mat-card>
+
+      <!-- Top tipos de alertas -->
+      <mat-card class="panel-card donut">
+        <grafana-frame
+          [ip]="central.ip"
+          [path]="'/d-solo/' + dashboardUid + '/snort-ids-ips-dashboard?orgId=1&panelId=14&refresh=30s'">
+        </grafana-frame>
+      </mat-card>
+
+      <!-- Top protocolos -->
+      <mat-card class="panel-card donut">
+        <grafana-frame
+          [ip]="central.ip"
+          [path]="'/d-solo/' + dashboardUid + '/snort-ids-ips-dashboard?orgId=1&panelId=22&refresh=30s'">
+        </grafana-frame>
+      </mat-card>
+
+      <!-- Top IPs origen -->
+      <mat-card class="panel-card pie">
+        <grafana-frame
+          [ip]="central.ip"
+          [path]="'/d-solo/' + dashboardUid + '/snort-ids-ips-dashboard?orgId=1&panelId=7&refresh=30s'">
+        </grafana-frame>
+      </mat-card>
+
+      <!-- Alertas en vivo -->
+      <mat-card class="panel-card alerts">
+        <grafana-frame
+          [ip]="central.ip"
+          [path]="'/d-solo/' + dashboardUid + '/snort-ids-ips-dashboard?orgId=1&panelId=13&refresh=10s'">
+        </grafana-frame>
+      </mat-card>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #fallback>
+  <p class="fallback">❌ No agent selected or dashboard could not be obtained</p>
+</ng-template>
+
+<ng-template #loading>
+  <div class="loading">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+</ng-template>
