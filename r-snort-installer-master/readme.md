@@ -99,12 +99,13 @@ R-SNORT Installer v1.0.0
 ```
 
 
-## Contact
-
-**Deian Orlando Petrovics T.**
-
-
+```
 ## License
+This project is released under the MIT License. See [LICENSE](https://choosealicense.com/licenses/mit/) for details.
+
+---
+## Contact
+**Deian Orlando Petrovics T.**
 
 MIT License. Free to use, modify, and distribute with attribution.
 
