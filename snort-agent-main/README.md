@@ -126,7 +126,7 @@ curl -X POST http://localhost:8080/restart
 
 ```
 ## ⚖️ Licencia
-his project is released under the MIT License. See [LICENSE](https://choosealicense.com/licenses/mit/) for details.
+This project is released under the MIT License. See [LICENSE](https://choosealicense.com/licenses/mit/) for details.
 
 ---
 ## Contact
