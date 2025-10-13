@@ -1,42 +1,42 @@
 # R-SNORT Installer
 
-Instalador automatizado de Snort 3.1.84 optimizado para Raspberry Pi 5 con arquitectura ARM64. Este proyecto proporciona un sistema completo de detección de intrusos (NIDS) configurado para brindar seguridad a redes SOHO, orientado a entornos experimentales, educativos o de pequeñas empresas.
+Automated installer for **Snort 3.1.84** optimized for the **Raspberry Pi 5** with ARM64 architecture. This project provides a complete Network Intrusion Detection System (NIDS) configured to secure SOHO networks, aimed at experimental, educational, or small business environments.
 
-## Características
+## Features
 
-- Compilación de Snort 3 y todas sus dependencias desde el código fuente.
-- Configuración avanzada de `snort.lua` para entorno Linux y redes asimétricas.
-- Integración con ClamAV para detección de malware.
-- Servicio systemd completamente configurado y habilitado.
-- Reglas comunitarias y personalizadas integradas.
-- Swap temporal habilitado para evitar errores por falta de memoria.
-- Validación de dependencias y estado del sistema.
-- Preprocesadores activos.
+- Compilation of Snort 3 and all its dependencies from source code.
+- Advanced configuration of `snort.lua` for Linux environments and asymmetric networks.
+- Integration with ClamAV for malware detection.
+- Fully configured and enabled systemd service.
+- Integrated community and custom rules.
+- Temporary swap enabled to prevent out-of-memory errors.
+- Validation of dependencies and system status.
+- Active preprocessors.
 
-## Requisitos
+## Requirements
 
-- Raspberry Pi 5 (ARM64) con Ubuntu Server o Desktop 24.04.
-- Usuario con privilegios de sudo.
-- Conexión a internet durante la instalación.
-- Al menos 8 GB de almacenamiento libre.
+- Raspberry Pi 5 (ARM64) running Ubuntu Server or Desktop 24.04.
+- User with sudo privileges.
+- Internet connection during installation.
+- At least 8 GB of free storage.
 
-## Estructura del proyecto
+## Project Structure
 
 ```
 .
-├── install_rsnort.sh            # Script de instalación principal
-├── r-snort-deb/                 # Estructura de paquete .deb personalizado
-│   ├── DEBIAN/                  # Scripts de mantenimiento del paquete
+├── install_rsnort.sh            # Main installation script
+├── r-snort-deb/                 # Custom .deb package structure
+│   ├── DEBIAN/                  # Package maintenance scripts
 │   └── opt/r-snort/            
-│       ├── bin/                # Scripts internos
-│       ├── configuracion/      # Archivos de reglas y configuración
-│       └── software/           # Tarballs del software a compilar
-└── r-snort-deb.deb             # Paquete .deb instalable
+│       ├── bin/                # Internal scripts
+│       ├── configuracion/      # Rules and configuration files
+│       └── software/           # Tarballs of software to be compiled
+└── r-snort-deb.deb             # Installable .deb package
 ```
 
-## Instalación
+## Installation
 
-### Opcion A: desde código fuente
+### Option A: From Source Code
 
 ```bash
 git clone https://github.com/deianp189/r-snort-installer.git
@@ -44,44 +44,45 @@ cd r-snort-installer
 sudo ./install_rsnort.sh
 ```
 
-Este script:
-- Actualiza el sistema
-- Instala dependencias con `apt`
-- Instala `r-snort-deb.deb` o lo construye si no existe
-- Ejecuta todo el flujo de instalación automatizado
+This script:
+- Updates the system
+- Installs dependencies using apt
+- Installs r-snort-deb.deb or builds it if it doesn't exist
+- Executes the entire automated installation flow
+    
 
-### Opcion B: instalación directa del paquete .deb
+### Option B: Direct .deb Package Installation
 
 ```bash
 sudo dpkg -i r-snort-deb.deb
 sudo apt --fix-broken install -y
 ```
 
-## Uso del sistema
+## System Usage
 
-El servicio Snort queda instalado como `snort.service` y se activa al arranque:
+The Snort service is installed as snort.service and is enabled on startup:
 
 ```bash
 sudo systemctl status snort
 sudo journalctl -u snort -f
 ```
 
-Los binarios, configuraciones y reglas están instalados bajo `/usr/local/snort/`.
+Binaries, configurations, and rules are installed under /usr/local/snort/.
 
-## Actualizaciones y mantenimiento
+## Updates and Maintenance
 
-- Para actualizar firmas de ClamAV:
+- To update ClamAV signatures:
   ```bash
   sudo freshclam
   ```
 
-- Para editar reglas personalizadas:
+- To edit custom rules:
   ```bash
   sudo nano /usr/local/snort/etc/snort/custom.rules
   sudo systemctl restart snort
   ```
 
-- Para desinstalar el sistema:
+- To uninstall the system:
   ```bash
   sudo systemctl stop snort
   sudo systemctl disable snort
@@ -90,31 +91,20 @@ Los binarios, configuraciones y reglas están instalados bajo `/usr/local/snort/
   sudo apt autoremove -y
   ```
 
-## Versionado
 
-Este repositorio utiliza [semver.org](https://semver.org/) como esquema de versiones:
-
-- `MAJOR`: cambios incompatibles con versiones anteriores.
-- `MINOR`: mejoras funcionales sin romper compatibilidad.
-- `PATCH`: correcciones de errores o mejoras menores.
-
-### Version actual
+### Current Version
 
 ```
 R-SNORT Installer v1.0.0
 ```
 
-## Contribuciones
 
-Pull requests, sugerencias y mejoras son bienvenidas. Este proyecto está pensado como base para automatizar Snort 3 en entornos ARM64, por lo que puede extenderse con nuevas funcionalidades, soporte para otras arquitecturas o integraciones.
-
-## Autor
+## Contact
 
 **Deian Orlando Petrovics T.**
 
-Estudiante de Ingeniería Informática. Proyecto desarrollado como parte del Trabajo Fin de Grado, orientado a la automatización de sistemas de detección de intrusos en entornos de bajo coste y arquitectura ARM.
 
-## Licencia
+## License
 
-Este proyecto está licenciado bajo los términos de la licencia UAL.
+MIT License. Free to use, modify, and distribute with attribution.
 
