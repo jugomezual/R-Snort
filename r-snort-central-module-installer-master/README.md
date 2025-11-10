@@ -47,7 +47,7 @@ Each Raspberry Pi or Ubuntu server acts as an autonomous agent that:
 
 ## 🚀 Automatic Installation
 
-> Prerequisites: Ubuntu Server 22.04+, sudo access, Internet connection.
+> Prerequisites: Ubuntu Server 24.04+ or upper, sudo access, Internet connection.
 
 ```bash
 git clone [https://github.com/jugomezual/rsnort-webapp.git](https://github.com/jugomezual/rsnort-webapp.git)
