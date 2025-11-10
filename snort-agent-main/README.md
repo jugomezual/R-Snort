@@ -37,7 +37,7 @@ Modular system to convert Snort 3 into a managed agent via a REST API, featuring
 ## 🛠️ Installation
 
 ```bash
-git clone [https://github.com/deianp189/snort-agent.git](https://github.com/deianp189/snort-agent.git)
+git clone https://github.com/deianp189/snort-agent.git
 cd snort-agent
 sudo ./install.sh
 
