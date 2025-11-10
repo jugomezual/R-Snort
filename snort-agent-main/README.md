@@ -28,7 +28,7 @@ Modular system to convert Snort 3 into a managed agent via a REST API, featuring
 
 ## 📋 Requirements
 
-* Ubuntu 22.04+ or Debian 10+ or upper
+* Ubuntu 22.04+ or upper
 * Python 3.8+, Bash, SQLite, Grafana, Snort 3
 * Root access during installation
 
