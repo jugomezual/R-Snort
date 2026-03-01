@@ -1,6 +1,6 @@
 # R-Snort
 
-The architecture of R-Snort is modular, distributed, and scalable, designed to adapt to SOHO environments. The system consists of two main elements: the Snort agents—deployed on embedded systems like the Raspberry Pi—and a central module that facilitates comprehensive coordination, management, and monitoring.
+The architecture of R-Snort is modular, distributed, and scalable, designed to adapt to SOHO and EoT networks. The system consists of two main elements: the Snort agents—deployed on embedded systems like the Raspberry Pi—and a central module that facilitates comprehensive coordination, management, and monitoring.
 
 Each Snort agent operates as an autonomous sensor, based on a customized version of Snort 3 to optimize performance on the limited hardware of embedded systems like the Raspberry Pi. These agents use a custom Snort installation compiled from its source code, incorporating various libraries for proper functioning, such as libdnet, libdaq, LuaJIT, Flex, Bison, and PCRE2. This allows for efficient and stable system execution on the Raspberry Pi platform.
 
