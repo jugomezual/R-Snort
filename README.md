@@ -26,7 +26,7 @@ Final Degree Project Advisor: Dr. D. Julio Gómez López and Dr. Nicolás Padill
 
 ---
 ## Contact
-**Deian Orlando Petrovics T.**
+** Julio Gómez López **
 
 ---
 ## License
